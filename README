@@ -1,0 +1,93 @@
+Automação de Testes E2E com Playwright e TypeScript
+
+Este repositório contém uma suíte de testes automatizados End-to-End (E2E) desenvolvida para validar os fluxos principais da aplicação Web SauceDemo.
+
+O projeto foi construído utilizando Playwright com TypeScript, focado em boas práticas de QA, seletores estáveis e execução nativa no navegador Chromium.
+
+🎯 Cenários Cobertos
+
+login-sucesso.spec.ts: Autenticação com credenciais válidas e validação do redirecionamento para o catálogo.
+
+login-invalido.spec.ts: Tentativa de acesso com senha incorreta e validação das mensagens de erro.
+
+adicionar-carrinho.spec.ts: Exibição dos produtos, adição de item ao carrinho, validação do contador (badge) e confirmação dos detalhes na página do carrinho.
+
+📁 Estrutura do Projeto
+Plaintext
+Afya teste/
+├── testes/
+│   ├── adicionar-carrinho.spec.ts  # Teste do fluxo do carrinho
+│   ├── login-invalido.spec.ts      # Teste do cenário negativo de login
+│   └── login-sucesso.spec.ts       # Teste do cenário positivo de login
+├── .gitignore                      # Arquivos/pastas ignorados pelo Git
+├── package-lock.json               # Trava de versões das dependências
+├── package.json                    # Dependências e scripts do projeto
+└── playwright.config.ts            # Configurações globais do Playwright
+
+📋 Pré-requisitos
+Antes de começar, você precisará ter instalado na sua máquina:
+
+Node.js (Versão 18 ou superior)
+
+Git
+
+🛠️ Passo a Passo para Instalação e Execução
+Siga as etapas abaixo para clonar, configurar e rodar o projeto localmente:
+
+1. Clonar o Repositório
+Abra o terminal e execute o comando abaixo para baixar o projeto:
+
+Bash
+git clone <URL_DO_REPOSITORIO>
+Navegue até a pasta do projeto:
+
+Bash
+cd "Sua pasta"
+2. Instalar as Dependências do Node
+Rode o comando a seguir para instalar todas as bibliotecas necessárias declaradas no package.json:
+
+Bash
+npm install
+3. Instalar o Navegador Chromium (Playwright)
+Baixe e configure o executável do navegador Chromium que será utilizado pelos testes:
+
+Bash
+npx playwright install chromium
+
+🚀 Como Executar os Testes
+Você pode executar a suíte de testes de diferentes formas conforme a sua necessidade:
+
+Executar em modo visível (Headed - com interface gráfica)
+Ideal para acompanhar a execução visualmente na tela:
+
+Bash
+npx playwright test --project=chromium --headed
+
+Executar em segundo plano (Headless)
+Ideal para execuções rápidas e ambientes de integração contínua (CI):
+
+Bash
+npx playwright test --project=chromium
+
+Executar um arquivo de teste específico
+Para rodar apenas um cenário individualmente (exemplo: login com sucesso):
+
+Bash
+npx playwright test testes/login-sucesso.spec.ts --project=chromium --headed
+
+📊 Relatório de Execução (HTML Report)
+
+Ao finalizar a execução dos testes, o Playwright gera automaticamente um relatório detalhado. Para abri-lo no seu navegador:
+
+Bash
+npx playwright show-report
+
+📌 Boas Práticas Aplicadas
+
+Seletores Estáveis: Utilização de seletores acessíveis e resilientes a mudanças de layout (getByPlaceholder, getByRole e atributos data-test).
+
+Assertions do Playwright: Uso exclusivo de asserções assíncronas do Playwright (expect(locator).toBeVisible(), toHaveText(), toHaveURL()).
+
+Sem Esperas Fixas: Ausência de waitForTimeout, garantindo execução rápida e confiável por meio de auto-waiting nativo.
+
+Isolamento: Testes 100% independentes, sem dependência de estado entre execuções.
